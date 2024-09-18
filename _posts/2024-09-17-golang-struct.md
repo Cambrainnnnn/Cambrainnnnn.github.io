@@ -122,7 +122,7 @@ topLeft 和 grid 究竟发生了什么？
 
 这里如果读者有 C 语言的背景，可以认为 grid 里的元素是数组指针，即其元素里每个变更都是一个数组的头指针。所以这里 topLeft 同样也是指向这片内存区域的 SliceHeader.
 
-![](https://cdn.z.wiki/autoupload/20240918/9oTl/555X261/golang-slice-header.png)
+![](https://cambrain-blog.oss-cn-chengdu.aliyuncs.com/golang-slice-header.png)
 
 虽然 topLeft 是一个新的 SliceHeader 变量，但仍然和grid 共享底层的内存空间。
 
@@ -130,7 +130,7 @@ topLeft 和 grid 究竟发生了什么？
 
 所以这里的核心要点就是，避免 topLeft 变量和 grid 变量共享同一片内存空间。所以这里需要使用内建函数 copy 进行深拷贝。
 
-![深拷贝](https://cdn.z.wiki/autoupload/20240918/Kqo6/555X261/golang-slice-header-deep-copy.png)
+![深拷贝](https://cambrain-blog.oss-cn-chengdu.aliyuncs.com/golang-slice-header-deep-copy.png)
 
 这里可以看到 tl 并没有和 grid 共享内存空间，其分别控制着自己的变量地址，这样可以保证修改元素后，不会影响其他元素获取这里的元素。
 
